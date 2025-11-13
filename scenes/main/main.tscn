@@ -9,6 +9,7 @@
 [node name="CurrentLevel" type="Node3D" parent="."]
 
 [node name="PrototypeLevel" parent="CurrentLevel" instance=ExtResource("2_iuonh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038122177, 0.027060866, -0.04590988)
 
 [node name="Manager" type="Node" parent="."]
 

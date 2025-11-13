@@ -110,11 +110,13 @@ func calculate_view_offset(delta : float) -> void:
 	# Headbob
 	
 	if enable_headbob:
-		var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
-		angles.x -= pitch_delta
-		
-		var roll_delta = bob_sin * deg_to_rad(bob_roll) * speed
-		angles.z -= roll_delta
+		match bob_style:
+			"QUAKE_2":
+				var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
+				angles.x -= pitch_delta
+				
+				var roll_delta = bob_sin * deg_to_rad(bob_roll) * speed
+				angles.z -= roll_delta
 		
 		var bob_height = absf(bob_sin * speed * bob_up)
 		offset.y += bob_height

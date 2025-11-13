@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://cstsgbjhy8wvs" path="res://scenes/player/camera_controller.gd" id="1_hdvuw"]
 [ext_resource type="Script" uid="uid://b8si164r6t21b" path="res://scenes/player/components/mouse_capture_component.gd" id="1_w63ml"]
 [ext_resource type="Script" uid="uid://bca4a1ksluekv" path="res://scenes/player/player_3d.gd" id="1_y3wh4"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_vl62o"]
 [ext_resource type="Script" uid="uid://dkcp4y0dilvwj" path="res://scenes/player/interaction_raycast.gd" id="4_blo27"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_harcl"]
 [ext_resource type="Script" uid="uid://ces6r7ellt377" path="res://scenes/player/camera_effects.gd" id="4_q2hxo"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_e0hk1"]
+[ext_resource type="Script" uid="uid://jg6auahbta6v" path="res://scenes/player/weapon_controller.gd" id="5_q2hxo"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_xhbws"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_vl62o"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_t3cmh"]
@@ -40,17 +40,6 @@ crouching_collision = NodePath("CrouchingCollision")
 crouch_check = NodePath("CrouchChecker")
 interaction_raycast = NodePath("CameraController/Camera3D/InteractionRaycast")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("2_vl62o")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 314.0
-offset_bottom = 510.0
-grow_horizontal = 1
-grow_vertical = 1
-initial_node_to_watch = NodePath("../StateStuff/StateChart")
-maximum_lines = 90
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_vw6wi")
 
@@ -69,14 +58,19 @@ crouch_offset = -1.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraController" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-fov = 105.0
+fov = 90.0
 script = ExtResource("4_q2hxo")
 player = NodePath("../..")
+bob_style = "QUAKE_2"
+bob_roll = 0.0
 
 [node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Camera3D"]
 target_position = Vector3(0, 0, -3)
 collide_with_areas = true
 script = ExtResource("4_blo27")
+
+[node name="WeaponController" type="Node3D" parent="CameraController/Camera3D"]
+script = ExtResource("5_q2hxo")
 
 [node name="CrouchChecker" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_j4jgq")

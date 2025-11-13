@@ -15,9 +15,14 @@ run/main_scene="uid://bp52noiieg1us"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_parameter=0
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fancy_editor_sounds/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 [input]
 
