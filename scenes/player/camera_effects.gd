@@ -145,7 +145,6 @@ func add_damage_kick(pitch : float, roll : float, source: Vector3):
 
 
 func add_weapon_kick(pitch : float, yaw : float, roll : float):
-	_weapon_kick_angles.x += deg_to_rad(pitch)
 	_weapon_kick_angles.y += deg_to_rad(randf_range(-yaw,yaw))
 	_weapon_kick_angles.z += deg_to_rad(randf_range(-roll,roll))
 

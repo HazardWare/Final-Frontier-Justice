@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c12vk534avtaq"]
+[gd_scene load_steps=27 format=3 uid="uid://c12vk534avtaq"]
 
 [ext_resource type="Script" uid="uid://cstsgbjhy8wvs" path="res://scenes/player/camera_controller.gd" id="1_hdvuw"]
 [ext_resource type="Script" uid="uid://b8si164r6t21b" path="res://scenes/player/components/mouse_capture_component.gd" id="1_w63ml"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_e0hk1"]
 [ext_resource type="Script" uid="uid://jg6auahbta6v" path="res://scenes/player/weapon_controller.gd" id="5_q2hxo"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_xhbws"]
+[ext_resource type="Script" uid="uid://dpv6nggyl4msw" path="res://scripts/nodedefs/weapon.gd" id="6_yc5pu"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_vl62o"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_t3cmh"]
 [ext_resource type="Script" uid="uid://bi8518gxajdix" path="res://scenes/player/statemachine/state_machine.gd" id="9_8tj8l"]
@@ -26,7 +27,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w63ml"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_l4o1f"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_q2hxo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j4jgq"]
 
@@ -48,13 +49,14 @@ shape = SubResource("CapsuleShape3D_w63ml")
 
 [node name="CrouchingCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("SphereShape3D_l4o1f")
+shape = SubResource("SphereShape3D_q2hxo")
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("player_controller", "component_mouse_capture")]
 script = ExtResource("1_hdvuw")
 player_controller = NodePath("..")
 component_mouse_capture = NodePath("../Components/MouseCaptureComponent")
-crouch_offset = -1.0
+tilt_lower_limit = -80
+tilt_upper_limit = 89
 
 [node name="Camera3D" type="Camera3D" parent="CameraController" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -71,6 +73,14 @@ script = ExtResource("4_blo27")
 
 [node name="WeaponController" type="Node3D" parent="CameraController/Camera3D"]
 script = ExtResource("5_q2hxo")
+
+[node name="Weapon" type="Node3D" parent="CameraController/Camera3D/WeaponController"]
+script = ExtResource("6_yc5pu")
+weapon_name = null
+weapon_full_name = null
+ammo_reserve = null
+ammo_loaded = null
+metadata/_custom_type_script = "uid://dpv6nggyl4msw"
 
 [node name="CrouchChecker" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_j4jgq")

@@ -14,5 +14,5 @@ grow_vertical = 2
 [node name="DrawReticle" type="Control" parent="Reticle"]
 layout_mode = 2
 script = ExtResource("1_2q31f")
-radius = 10.0
-thickness = 2.0
+thickness = 5.0
+gap_angle = 25.0

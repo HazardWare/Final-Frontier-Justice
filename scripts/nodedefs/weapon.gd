@@ -1,9 +1,17 @@
-@abstract class_name Weapon
+class_name Weapon
 extends Node3D
 
-@export_category("Basic Info")
 @export var weapon_name : String ## Weapon's shorthand name. (I.E: Glock, M1911)
 @export var weapon_full_name : String ## Weapon's full name (I.E: Glock 18 Semi-Automatic Pistol, Colt Model M1911A1 Semi-Automatic Pistol)
+
+@export_group("Ammo Info")
+@export var ammo_reserve : int
+@export var ammo_loaded : int
+
+@export_group("Actions")
+@export var primary_attack :
+
+#plingar
 
 var CURRENT_STATE : WEAPON_STATES
 
@@ -15,7 +23,7 @@ enum WEAPON_STATES {
 	RELOAD
 }
 
-func _process(delta: float) -> void:
+func weapon_process(delta: float) -> void:
 	match CURRENT_STATE:
 		WEAPON_STATES.READY:
 			weapon_ready()
@@ -29,8 +37,8 @@ func _process(delta: float) -> void:
 			weapon_reload()
 
 
-@abstract func weapon_ready() -> void
-@abstract func weapon_fire() -> void
-@abstract func weapon_raise() -> void
-@abstract func weapon_lower() -> void
-@abstract func weapon_reload() -> void
+func weapon_ready() -> void: push_error("State not defined: weapon_ready")
+func weapon_fire() -> void: push_error("State not defined: weapon_fire")
+func weapon_raise() -> void: push_error("State not defined: weapon_raise")
+func weapon_lower() -> void: push_error("State not defined: weapon_lower")
+func weapon_reload() -> void: push_error("State not defined: weapon_reload")
