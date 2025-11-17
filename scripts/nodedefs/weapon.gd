@@ -9,7 +9,7 @@ extends Node3D
 @export var ammo_loaded : int
 
 @export_group("Actions")
-@export var primary_attack :
+@export var primary_attack : Attack
 
 #plingar
 
